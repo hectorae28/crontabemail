@@ -28,4 +28,4 @@ class Calendario(models.Model):
 
     #
     def __str__(self):
-        return f"{self.year}-{self.mes}"
+        return f"{self.year}-{self.mes} | {self.tramites.nombre}"

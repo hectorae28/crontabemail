@@ -1,25 +1,24 @@
 from .models import Client, Calendario, Tramite
 from django.core.mail import EmailMessage
-from .tools import get_rif_day
+from django.template.loader import render_to_string
+from .tools import get_rif_of_day_report
 
 
 def test():
-    end_rif = get_rif_day(Calendario)
-    clients = Client.objects.filter(rif__endswith=end_rif)
-    print(clients)  # .values_list("email", flat=True))
-
+    end_rif = get_rif_of_day_report(Calendario)
+    print(end_rif)
     """
-
-email = EmailMessage(
-    "Hello",
-    "Body goes here",
-    "from@example.com",
-    ["to1@example.com", "to2@example.com"],
-    ["bcc@example.com"],
-    reply_to=["another@example.com"],
-    headers={"Message-ID": "foo"},
-)
-
+    clients = Client.objects.filter(rif__endswith=end_rif)
+    print(clients.values_list("name", flat=True))
+    html_content = render_to_string("report.html")
+    email = EmailMessage(
+        "Recordatorio",
+        html_content,
+        "harcher5c@gmail.com",
+        list(clients.values_list("email", flat=True)),
+    )
+    email.content_subtype = "html"
+    email.send()
     """
 
 

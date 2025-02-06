@@ -19,7 +19,7 @@ services:
     env_file:
       - .env.dev
     command: >
-      sh -c "sh migrations.sh && python manage.py runserver 0.0.0.0:8000"
+      sh -c "sh migrations.sh && python manage.py crontab add && python manage.py runserver 0.0.0.0:8000 "
     depends_on:
       - db
 

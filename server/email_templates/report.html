@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recordatorio de Pago de Impuestos</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        background-color: #003366;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+      .logo {
+        max-width: 150px;
+        height: auto;
+      }
+      .content {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+      }
+      .button {
+        display: inline-block;
+        background-color: #003366;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+      .footer {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 12px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img
+        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2016%2F12%2F27%2F13%2F10%2Flogo-1933884_1280.png&f=1&nofb=1&ipt=0633d847b0b368abbd3b4976d76a44f25e948a835fdb2677b3e094310b47dd46&ipo=images"
+        alt="Logo de la Empresa"
+        class="logo"
+      />
+      <h1>Recordatorio Importante</h1>
+    </div>
+    <div class="content">
+      <p>Estimado cliente,</p>
+      <p>
+        Le recordamos que la fecha límite para declarar el impuestos al valor
+        agregado está por acercarce. Es fundamental realizar el pago a tiempo
+        para evitar recargos o sanciones.
+      </p>
+      <p>Fechas en las que tiene que declarar en el mes de !!:</p>
+      <ul>
+        {% for tramite in tramites %}
+        <li>{{tramite}}</li>
+        {% endfor %}
+        <!--   <li>ACTIVIDAD DE JUEGOS DE ENVITE Y AZAR: !!</li> -->
+        <!--   <li>RETENCIONES DE I.S.L.R. PARA LOS PREMIOS DE LOTERÍA: !!</li> -->
+        <!--   <li>RETENCIONES DE IMPUESTOS SOBRE LA RENTA (I.S.L.R.): !!</li> -->
+        <!--   <li> -->
+        <!--     DECLARACIONES DE LOS SERVICIOS AUTÓNOMOS Y ENTES DESCENTRALIZADOS: !! -->
+        <!--   </li> -->
+        <!--   <li>ESTIMADAS DE IMPUESTOS SOBRE LA RENTA (I.S.L.R.): !!</li> -->
+        <!--   <li> -->
+        <!--     DECLARACIONES DEFINITIVA DEL I.S.L.R. (Ejercicios Irregulares): !! -->
+        <!--   </li> -->
+        <!--   <li>DECLARACIONES DE IMPUESTO AL VALOR AGREGADO (I.V.A.): !!</li> -->
+        <!--   <li>RETENCIONES DE IMPUESTO AL VALOR AGREGADO (I.V.A.): !!</li> -->
+        <!--   <li>ANTICIPO DEL IMPUESTOS SOBRE LA RENTA (I.S.L.R.): !!</li> -->
+        <!--   <li> -->
+        <!--     DECLARACIONES DE IMPUESTO A LAS GRANDES TRANSACCIONES FINANCIERAS -->
+        <!--     (I.G.T.F.): !! -->
+        <!--   </li> -->
+      </ul>
+      <p>
+        Si necesita asistencia o tiene alguna pregunta, no dude en contactarnos.
+        Estamos aquí para ayudarle.
+      </p>
+      <a href="#" class="button">Ver Detalles de Pago</a>
+    </div>
+    <div class="footer">
+      <p>Este es un correo automático, por favor no responda a este mensaje.</p>
+      <p>
+        © 2025 [Nombre de la Empresa de Contaduría]. Todos los derechos
+        reservados.
+      </p>
+    </div>
+  </body>
+</html>
