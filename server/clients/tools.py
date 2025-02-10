@@ -14,16 +14,18 @@ def get_rif_of_day_report(calendar_class):
         for i, declaracion in enumerate(evento):
             if dia_reporte.day in declaracion:
                 response["end_rif"] = i
-    """
-    full_calendar = calendar_class.objects.filter(
-        mes=dia_reporte.month, year=dia_reporte.year
+
+
+def get_report_of_rif(calendar_class):
+    hoy = datetime.now()
+    # response = {}
+    calendar = calendar_class.objects.filter(
+        mes=hoy.month,
+        year=hoy.year,
     )
-    response["tramites"] = []
-    for full_event in full_calendar:
-        for days in full_event.dias.values():
-            response["tramites"].append(
-                {full_event.tramites.nombre: days[response["end_rif"]]}
-            )
-        # print(full_event)
-    return response
-"""
+    for tramite in calendar.values():
+        print(tramite)
+        for evento in tramite.dias.values():
+            print(evento)
+            for i, declaracion in enumerate(evento):
+                print(declaracion)
