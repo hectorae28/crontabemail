@@ -1,3 +1,7 @@
+"use client"
+import { useEffect } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { Input } from "./ui/input";
@@ -11,35 +15,57 @@ import {
 } from "@/components/ui/form";
 
 export default function Login() {
-  
-    const form = useForm({
+  const { data: session, status } = useSession()
+  const form = useForm({
       defaultValues: {
         password: "",
-        email: "",
+        username: "",
       },
+  });
+
+  const router = useRouter();
+
+  useEffect(() => {
+      if (status === "authenticated") {
+        router.push("/dashboard");
+      }
+  }, [status, router]);  
+
+    
+    const onSubmit = async (data) => {
+      const result = await signIn("credentials", {
+      username: data.username,
+      password: data.password,
+      redirect: false, 
     });
-  
-  
-    const onSubmit = (data) => {
-      console.log("Datos del formulario:", data);
+
+    if (result?.error) {
+      console.error("Error al iniciar sesión:", result.error);
+    } else {
+      router.push("/dashboard");
+    }
     };
+    
+    if (status === "loading") {
+      return <p>Cargando...</p>;
+    }
+  
   
     return( 
       <>
-        <h1>Inicio de sesión</h1>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-6 bg-white rounded-md shadow-md flex flex-col items-center">
+          <form onSubmit={form.handleSubmit(onSubmit)} className=" w-full max-w-md space-y-4 p-6 bg-white rounded-md shadow-md flex flex-col justify-center">
           <FormField
           control={form.control} 
-          name="email"
+          name="username"
           rules = {{
-            required: "El email es requerido"
+            required: "The username is required"
           }} 
           render={({ field, fieldState: { error } }) => (
            <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="Ingresa tu email" {...field} />
+                <Input placeholder="Enter username" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>          
@@ -49,13 +75,13 @@ export default function Login() {
           control={form.control}
           name="password"
           rules = {{
-            required: "La contarseña es requerida"
+            required: "The password is required"
           }}          
           render={({ field, fieldState: { error } }) => (
            <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="Ingresa tu contraseña" {...field} />
+                <Input type="password" placeholder="Enter password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>          

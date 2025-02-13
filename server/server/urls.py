@@ -22,5 +22,5 @@ from clients.views import LoginView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/email/", include("clients.urls")),
-    path("api/login/", LoginView.as_view(), name="login"),
+    path("api/login/", LoginView.as_view(), name="login"), 
 ]

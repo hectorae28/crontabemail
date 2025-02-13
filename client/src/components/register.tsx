@@ -84,7 +84,7 @@ export default function Register() {
            <FormItem>
               <FormLabel>Contraseña</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your password" {...field} />
+                <Input type="password" placeholder="Enter your password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>          
@@ -103,7 +103,7 @@ export default function Register() {
            <FormItem>
               <FormLabel>Confirm Password</FormLabel>
               <FormControl>
-                <Input placeholder="Confirm your password" {...field} />
+                <Input type="password" placeholder="Confirm your password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>          
@@ -125,14 +125,13 @@ export default function Register() {
            <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" {...field} />
+                <Input type="email" placeholder="Enter your email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>          
         )}
         />
         <Button className="mt-6" type="submit">Register</Button>
-        <h1>XD</h1>
       </form>
     </Form>  
     </>
