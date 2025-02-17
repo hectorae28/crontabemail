@@ -69,10 +69,11 @@
         agregado está por acercarce. Es fundamental realizar el pago a tiempo
         para evitar recargos o sanciones.
       </p>
-      <p>Fechas en las que tiene que declarar en el mes de !!:</p>
+      <p>Fechas en las que tiene que declarar en el mes de {{mes}}:</p>
+      <p>{{report}}</p>
       <ul>
-        {% for tramite in tramites %}
-        <li>{{tramite}}</li>
+        {% for report in reports %}
+        <li>{{report}}</li>
         {% endfor %}
         <!--   <li>ACTIVIDAD DE JUEGOS DE ENVITE Y AZAR: !!</li> -->
         <!--   <li>RETENCIONES DE I.S.L.R. PARA LOS PREMIOS DE LOTERÍA: !!</li> -->

@@ -1,11 +1,10 @@
 from datetime import datetime, timedelta
+from .models import Client, Calendario, Tramite
 
 
-def get_rif_of_day_report(calendar_class):
-    hoy = datetime.now()
+def get_rif_of_day_report(dia_reporte):
     response = {}
-    dia_reporte = hoy + timedelta(days=3)
-    calendar = calendar_class.objects.get(
+    calendar = Calendario.objects.get(
         mes=dia_reporte.month,
         year=dia_reporte.year,
         tramites__nombre="DECLARACIONES DE IMPUESTO AL VALOR AGREGADO (I.V.A.)",
@@ -13,17 +12,19 @@ def get_rif_of_day_report(calendar_class):
     for evento in calendar.dias.values():
         for i, declaracion in enumerate(evento):
             if dia_reporte.day in declaracion:
-                response["end_rif"] = i
-    """
-    full_calendar = calendar_class.objects.filter(
-        mes=dia_reporte.month, year=dia_reporte.year
+                return i
+
+
+def get_report_of_rif(rif):
+    hoy = datetime.now()
+    response = []
+    calendar = Calendario.objects.filter(
+        mes=hoy.month,
+        year=hoy.year,
     )
-    response["tramites"] = []
-    for full_event in full_calendar:
-        for days in full_event.dias.values():
-            response["tramites"].append(
-                {full_event.tramites.nombre: days[response["end_rif"]]}
-            )
-        # print(full_event)
+    for tramite in calendar.values():
+        values = list(tramite["dias"].values())
+        tramite = Tramite.objects.get(id=tramite["tramites_id"])
+        response.append(f"{tramite.nombre}: {values[0][rif][0]} y {values[0][rif][1]}")
+        # response[tramite.nombre] = values[0][rif]
     return response
-"""
