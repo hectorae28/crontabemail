@@ -1,14 +1,27 @@
 from .models import Client, Calendario, Tramite
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
-from .tools import get_rif_of_day_report
+from .tools import get_rif_of_day_report, get_report_of_rif
+from datetime import datetime, timedelta
 
 
 def test():
-    end_rif = get_rif_of_day_report(Calendario)
+    hoy = datetime.now()
+    dia_reporte = hoy + timedelta(days=3)
+    end_rif = get_rif_of_day_report(hoy)
     print(end_rif)
-    """
+    reports = get_report_of_rif(end_rif)
+    print(f"Report: {reports}")
     clients = Client.objects.filter(rif__endswith=end_rif)
+    print(clients.values_list("name", flat=True))
+
+
+"""
+    for i in reports:
+        for report in reports.values():
+            print(f"{i} {report[0]} {report[1]}")
+
+        clients = Client.objects.filter(rif__endswith=end_rif)
     print(clients.values_list("name", flat=True))
     html_content = render_to_string("report.html")
     email = EmailMessage(
